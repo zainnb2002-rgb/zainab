@@ -708,6 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
     vids.forEach(it=>cards.push(`<div class="video-card"><div class="video-wrap"><video src="${it.url}" controls></video></div>
       <div class="card-actions" style="position:absolute;top:12px;inset-inline-end:12px">
         <a class="icon-btn" href="${it.url}" download title="تنزيل"><i class="fa-solid fa-download"></i></a>
+        <button class="icon-btn" data-del="${it.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
       </div></div>`));
     container.innerHTML = cards.length ? cards.join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد عناصر حتى الآن.</p>';
   }
