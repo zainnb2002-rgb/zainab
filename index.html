@@ -684,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMedia();
   }
 
-  // Renderers
+  // ---------- RENDERERS ----------
   const gGrid = document.getElementById('galleryGrid');
   const supportGrid5 = document.getElementById('supportGrid5');
   const supportGrid8 = document.getElementById('supportGrid8');
@@ -708,17 +708,75 @@ document.addEventListener('DOMContentLoaded', () => {
     vids.forEach(it=>cards.push(`<div class="video-card"><div class="video-wrap"><video src="${it.url}" controls></video></div>
       <div class="card-actions" style="position:absolute;top:12px;inset-inline-end:12px">
         <a class="icon-btn" href="${it.url}" download title="تنزيل"><i class="fa-solid fa-download"></i></a>
-        <button class="icon-btn" data-del="${it.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
       </div></div>`));
     container.innerHTML = cards.length ? cards.join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد عناصر حتى الآن.</p>';
   }
 
+  // ---------- ADD: helpers to decorate support grids with Delete ----------
+  function addActionBar(parent, path, url, anchored=false){
+    const bar = document.createElement('div');
+    bar.className = 'card-actions';
+    bar.setAttribute('data-guard',''); // hidden when logged out
+    if (anchored) {
+      bar.style.position = 'absolute';
+      bar.style.top = '12px';
+      bar.style.insetInlineEnd = '12px';
+    }
+    bar.innerHTML = `
+      <button class="icon-btn" data-del="${path}" title="حذف / Delete">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+      <a class="icon-btn" href="${url}" download title="تنزيل / Download">
+        <i class="fa-solid fa-download"></i>
+      </a>
+    `;
+    parent.appendChild(bar);
+  }
+
+  function decorateSupportGrid(container, imgs, vids){
+    // remove any previous image action bars to avoid duplicates
+    container.querySelectorAll('.item .card-actions').forEach(el => el.remove());
+
+    // Images: create Delete + Download
+    const imgCards = Array.from(container.querySelectorAll('.item'));
+    imgCards.forEach((wrap, i)=>{
+      const meta = imgs[i]; if (!meta) return;
+      addActionBar(wrap, meta.path, meta.url);
+    });
+
+    // Videos: ensure a Delete button exists (download is already rendered)
+    const vidCards = Array.from(container.querySelectorAll('.video-card'));
+    vidCards.forEach((wrap, i)=>{
+      const meta = vids[i]; if (!meta) return;
+      let bar = wrap.querySelector('.card-actions');
+      if (!bar) {
+        addActionBar(wrap, meta.path, meta.url, true);
+        bar = wrap.querySelector('.card-actions');
+      } else if (!bar.querySelector('[data-del]')) {
+        const btn = document.createElement('button');
+        btn.className = 'icon-btn';
+        btn.title = 'حذف / Delete';
+        btn.setAttribute('data-del', meta.path);
+        btn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        bar.prepend(btn);
+        bar.setAttribute('data-guard','');
+      }
+    });
+
+    // Wire delete clicks
+    container.querySelectorAll('[data-del]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const path = btn.dataset.del;
+        if (confirm('هل تريدين حذف هذا الملف؟')) removeFile(path);
+      });
+    });
+  }
+
   // Inputs (guarded)
   document.getElementById('imgInput')?.addEventListener('change', (e)=>uploadMany('images', e.target.files));
-
   document.getElementById('sp5ImgInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_5_IMG_PATH, e.target.files));
   document.getElementById('sp5VidInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_5_VID_PATH, e.target.files));
-
   document.getElementById('sp8ImgInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_8_IMG_PATH, e.target.files));
   document.getElementById('sp8VidInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_8_VID_PATH, e.target.files));
 
@@ -730,13 +788,16 @@ document.addEventListener('DOMContentLoaded', () => {
       listAt(SUPPORT_8_IMG_PATH), listAt(SUPPORT_8_VID_PATH),
       getUser()
     ]);
-    renderImages(imgs);
-   renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
-    renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
-  
-    setGuardVisible(!!user);
 
-    
+    renderImages(imgs);
+
+    renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
+    decorateSupportGrid(supportGrid5, s5Imgs, s5Vids);   // ✅ add delete buttons
+
+    renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
+    decorateSupportGrid(supportGrid8, s8Imgs, s8Vids);   // ✅ add delete buttons
+
+    setGuardVisible(!!user);
   }
 
   supabaseClient.auth.onAuthStateChange(async ()=>{ showAuth(false); loadMedia(); });
