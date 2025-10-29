@@ -731,8 +731,68 @@ document.addEventListener('DOMContentLoaded', () => {
     ]);
     renderImages(imgs);
    renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
+    decorateSupportGrid(supportGrid5, s5Imgs, s5Vids);   // ✅ add
     renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
-  
+    decorateSupportGrid(supportGrid8, s8Imgs, s8Vids);   // ✅ add
+  // Add delete/download actions to support grids (no changes to renderSupportGrid)
+function addActionBar(parent, path, url, anchored=false){
+  const bar = document.createElement('div');
+  bar.className = 'card-actions';
+  bar.setAttribute('data-guard','');               // hidden when logged out
+  if (anchored) { bar.style.position='absolute'; bar.style.top='12px'; bar.style.insetInlineEnd='12px'; }
+  bar.innerHTML = `
+    <button class="icon-btn" data-del="${path}" title="حذف / Delete">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+    <a class="icon-btn" href="${url}" download title="تنزيل / Download">
+      <i class="fa-solid fa-download"></i>
+    </a>
+  `;
+  parent.appendChild(bar);
+}
+
+function decorateSupportGrid(container, imgs, vids){
+  // (optional) prevent duplicates if loadMedia() runs again
+  container.querySelectorAll('.card-actions').forEach(el => {
+    if (!el.closest('.video-card')) el.remove();   // keep the video bar; we'll modify it below
+  });
+
+  // IMAGES: create our actions bar
+  const imgCards = Array.from(container.querySelectorAll('.item'));
+  imgCards.forEach((wrap, i) => {
+    const meta = imgs[i]; if (!meta) return;
+    addActionBar(wrap, meta.path, meta.url);       // adds Delete + Download
+  });
+
+  // VIDEOS: append ONLY a Delete button to the existing download bar
+  const vidCards = Array.from(container.querySelectorAll('.video-card'));
+  vidCards.forEach((wrap, i) => {
+    const meta = vids[i]; if (!meta) return;
+    let bar = wrap.querySelector('.card-actions');
+    if (!bar) {                                    // safety: if no bar, create anchored one
+      addActionBar(wrap, meta.path, meta.url, true);
+      bar = wrap.querySelector('.card-actions');
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'icon-btn';
+      btn.title = 'حذف / Delete';
+      btn.setAttribute('data-del', meta.path);
+      btn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+      bar.prepend(btn);                            // put delete before download
+      bar.setAttribute('data-guard','');           // hide when logged out
+    }
+  });
+
+  // Wire delete
+  container.querySelectorAll('[data-del]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const path = btn.dataset.del;
+      if (confirm('هل تريدين حذف هذا الملف؟')) removeFile(path);
+    });
+  });
+}
+
     setGuardVisible(!!user);
 
     
