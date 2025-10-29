@@ -162,8 +162,7 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 .pdf-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .pdf-card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 18px rgba(176,139,0,.07);overflow:hidden;position:relative;display:flex;flex-direction:column}
 .pdf-wrap{position:relative;width:100%;aspect-ratio:3/4;background:#fff8cf;border-bottom:1px solid var(--line);display:grid;place-items:center}
-.pdf-wrap iframe,.pdf-wrap embed{width:100%;height:100%;border:0}
-.pdf-icon{font-size:42px;color:#d39d00}
+.pdf-wrap embed{width:100%;height:100%;border:0;display:block}
 .pdf-body{padding:12px 12px 14px}
 .pdf-name{font-weight:800;color:#6a4b00;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pdf-actions{position:absolute;top:10px;inset-inline-end:10px;display:flex;gap:6px}
@@ -182,8 +181,9 @@ footer .en{font-family:'Poppins',sans-serif;font-weight:600;color:#444}
 /* Lightbox */
 #overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
 #overlay.show{display:flex}
-#overlay .box{max-width:95vw;max-height:92vh}
-#overlay img,#overlay video,#overlay iframe{max-width:95vw;max-height:90vh;object-fit:contain;background:#000;border-radius:10px}
+#overlay .box{width:95vw;height:92vh;max-width:95vw;max-height:92vh;overflow:hidden;-webkit-overflow-scrolling:touch}
+#overlay img,#overlay video{max-width:95vw;max-height:90vh;background:#000;border-radius:10px;display:block}
+#overlay iframe{width:100%;height:100%;border:0;display:block;background:#000;border-radius:10px}
 #overlay .close{position:absolute;top:10px;inset-inline-end:14px;color:#fff;font-size:30px;cursor:pointer}
 
 /* Modal */
@@ -535,12 +535,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const box = overlay.querySelector('.box');
   function openImage(src, alt=''){ box.innerHTML=''; const big = new Image(); big.loading='eager'; big.src=src; big.alt=alt; overlay.classList.add('show'); box.appendChild(big); }
   function openVideo(src){ box.innerHTML=''; const vv=document.createElement('video'); vv.src=src; vv.controls=true; vv.autoplay=true; overlay.classList.add('show'); box.appendChild(vv); }
+
+  const isSmallScreen = () => window.matchMedia('(max-width: 680px)').matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
   function openPdf(src){
+    // On phones/small screens, open in native viewer (new tab) for full scrolling
+    if (isSmallScreen()) {
+      window.open(src, '_blank', 'noopener');
+      return;
+    }
+    // Desktop/tablet overlay with proper scrolling
     box.innerHTML='';
     const iframe=document.createElement('iframe');
-    // Hide default toolbar for a cleaner look where supported
-    iframe.src = src + '#toolbar=0&navpanes=0&scrollbar=0';
-    iframe.style.width='95vw'; iframe.style.height='90vh';
+    // Keep toolbar hidden but allow scrolling; do NOT disable scrollbars.
+    iframe.src = src + '#toolbar=0&navpanes=0';
     overlay.classList.add('show');
     box.appendChild(iframe);
   }
@@ -553,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const MEDIA_BUCKET = 'mida';
   const BASE_PATH   = 'zainab';
-  const CERTS_PATH  = 'zainab/certificates';              // <— PDFs live here
+  const CERTS_PATH  = 'zainab/certificates';
   const SUPPORT_5_IMG_PATH = 'zainab/support/grade5/images';
   const SUPPORT_5_VID_PATH = 'zainab/support/grade5/videos';
   const SUPPORT_8_IMG_PATH = 'zainab/support/grade8/images';
@@ -706,17 +714,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== Certificates (PDF) =====
   function renderCertificates(list){
-    // only PDFs
     const pdfs = list.filter(it => /\.pdf$/i.test(it.name));
     certsGrid.innerHTML = pdfs.length ? pdfs.map(it=>`
       <div class="pdf-card">
         <div class="pdf-wrap">
-          <!-- Lightweight inline preview; clicks open a big overlay -->
-          <embed src="${it.url}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" />
+          <embed src="${it.url}#toolbar=0&navpanes=0" type="application/pdf" />
           <button class="pdf-open" data-open="${it.url}" aria-label="Open PDF"></button>
           <div class="pdf-actions" data-guard>
             <button class="icon-btn" data-del="${it.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
             <a class="icon-btn" href="${it.url}" download title="تنزيل / Download"><i class="fa-solid fa-download"></i></a>
+            <a class="icon-btn" href="${it.url}" target="_blank" rel="noopener" title="فتح في صفحة جديدة"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
         <div class="pdf-body">
@@ -725,7 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد شهادات PDF حتى الآن.</p>';
 
-    // open overlay
+    // open overlay / or new tab on phones
     certsGrid.querySelectorAll('[data-open]').forEach(btn=>{
       btn.addEventListener('click', ()=> openPdf(btn.dataset.open));
     });
