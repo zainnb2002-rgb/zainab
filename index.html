@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>الملف التعريفي | المعلمة زينب علي صالح</title>
+
+<!-- Fonts + Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+/* ===================== THEME ===================== */
+:root{
+  --bg:#fffdf5; --card:#ffffff; --ink:#3b3b3b; --muted:#606b74;
+  --brand:#fdf3bf; --brand-2:#fff3b0; --line:#f1e6ba; --accent:#fff7cf;
+  --brand-ink:#7a5a00;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif}
+html{scroll-behavior:smooth}
+a{color:#8a6a00;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
+
+/* ===================== TOPBAR ===================== */
+.topbar{
+  position:sticky; top:0; z-index:90;
+  background:rgba(255,240,170,.7);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:10px 0}
+.brand{font-weight:800;letter-spacing:.2px;color:#7a5a00;display:flex;align-items:center;gap:10px;min-width:0}
+.brand .mark{width:34px;height:34px;border-radius:10px;background:conic-gradient(from 0deg at 50% 50%,#ffd84f,#fff3b0,#ffd84f);border:1px solid #e9d689;box-shadow:0 6px 18px rgba(133,102,0,.12),inset 0 0 0 4px rgba(255,255,255,.5)}
+.brand span{max-width:60vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu{display:none !important}
+.lang-switch{display:flex;gap:8px;align-items:center}
+.lang-switch button,.login-btn,.nav-btn{
+  background:var(--brand);color:var(--brand-ink);
+  border:1px solid #fdea9b;border-radius:12px;
+  padding:8px 12px;font-weight:800;cursor:pointer;box-shadow:0 2px 0 #e7cc6f
+}
+.lang-switch .secondary{background:#fff3c9;color:#7a5a00;border:1px solid var(--line)}
+#sectionsBtn{background:#fff8cf;color:#7a5a00;border:1px solid var(--line)}
+/* guard: upload buttons hidden until login */
+[data-guard]{display:none}
+
+/* Sections quick panel */
+#sectionsPanel{
+  position:fixed;inset-inline-end:16px;top:62px;background:#fff;
+  border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.12);
+  padding:10px;display:none;z-index:95;max-height:60vh;overflow:auto;min-width:240px
+}
+#sectionsPanel a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;color:#7a5a00;font-weight:700}
+#sectionsPanel a i{color:#d39d00}
+#sectionsPanel a:hover{background:var(--accent)}
+
+/* ===================== HERO ===================== */
+.hero{
+  position:relative;isolation:isolate;padding:clamp(28px,5vw,70px) 0;
+  background:
+    radial-gradient(1200px 600px at 80% -20%, #fff19f 0%, rgba(255, 248, 212, 0.98) 60%),
+    linear-gradient(145deg,#fff7cf 0%,#fff7a4 40%,#fff7cf 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero::before{
+  content:"";position:absolute;inset:auto 0 0 0;height:120px;z-index:-1;
+  background:
+    radial-gradient(100% 120% at 50% 120%, rgba(255, 240, 179, 0.6) 0%, rgba(255,231,133,0) 60%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="140" viewBox="0 0 1440 140" preserveAspectRatio="none"><path d="M0,80 C240,120 480,0 720,60 C960,120 1200,30 1440,70 L1440,140 L0,140 Z" fill="%23fff3b0"/></svg>') center/cover no-repeat;
+  opacity:.8;
+}
+.hero-card{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(16px,3vw,28px);
+  background:linear-gradient(180deg,#fdf399cc,#fffffffa);
+  border:1px solid var(--line);border-radius:20px;box-shadow:0 14px 40px rgba(255, 245, 207, .9);
+  padding:clamp(16px,3vw,28px)
+}
+.hero-text h1{margin:0 0 6px;font-size:clamp(22px,4.4vw,36px);color:#6a4b00}
+.hero-text h2{margin:0 0 14px;font-size:clamp(14px,2.2vw,18px);color:#a17200;font-weight:700}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:#fff9da;border:1px solid #f0dea2;color:#6a4b00;font-weight:700}
+.badge i{color:#d39d00}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  background:var(--brand);color:var(--brand-ink);
+  border:1px solid #fff7d2;border-radius:12px;
+  padding:10px 14px;font-weight:900;cursor:pointer;
+  transition:transform .15s ease,box-shadow .15s ease
+}
+.btn:hover{background:#fdf3bf;color:#7a5a00;border:1px solid var(--line)}
+.btn.secondary{background:#fff7cf;color:#7a5a00;border:1px solid var(--line)}
+.btn.ghost{background:transparent;color:#7a5a00;border:1px dashed #e7cc6f}
+
+/* Visual */
+.hero-visual{display:grid;place-items:center}
+.profile-chip{
+  width:min(320px,90%);aspect-ratio:1/1;border-radius:24px;
+  background:
+    radial-gradient(60% 60% at 70% 20%, #fff3b0 0%, rgba(255,243,176,0) 70%),
+    linear-gradient(180deg,#fff 0%,#fffaf0 100%);
+  border:1px solid var(--line);
+  box-shadow:0 20px 50px rgba(176,139,0,.16), inset 0 0 0 8px rgba(255,255,255,.7);
+  display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.profile-chip i{font-size:72px;color:#d39d00;filter:drop-shadow(0 8px 18px rgba(176,139,0,.25))}
+
+/* ===================== SECTIONS ===================== */
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(176,139,0,.06);padding:24px;margin:22px auto;scroll-margin-top:86px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-inline:8px;margin:-4px -6px 12px}
+.section-head .title{margin:0;color:#7a5a00;display:flex;align-items:center;gap:10px;border-inline-start:6px solid var(--brand-2);padding-inline-start:10px}
+.section-head .title i{color:#d39d00}
+.section-head .actions{display:flex;gap:8px}
+.btn.icon{width:34px;height:34px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:10px}
+.btn.icon i{font-size:14px}
+@media (max-width:560px){.btn.icon{width:30px;height:30px}.btn.icon i{font-size:13px}}
+
+.lead{font-size:18px;line-height:1.9}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:860px){.two-col{grid-template-columns:1fr}}
+
+/* ===================== MEDIA GRIDS ===================== */
+.gallery{display:grid;gap:16px;grid-template-columns:repeat(auto-fit, minmax(150px,1fr))}
+.gallery .item{position:relative}
+.gallery img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;border:1px solid var(--line);box-shadow:0 6px 18px rgba(176,139,0,.07);transition:transform .25s ease;cursor:zoom-in}
+.gallery img:hover{transform:scale(1.03)}
+.card-actions{position:absolute;top:8px;inset-inline-end:8px;display:flex;gap:6px}
+.icon-btn{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;padding:6px;cursor:pointer}
+
+.videos-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit, minmax(220px,1fr))}
+.video-card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 18px rgba(176,139,0,.07);padding:12px;position:relative}
+.video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
+.video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
+
+/* Skills */
+.skills-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit, minmax(180px,1fr))}
+.skill{background:#fffced;border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center;min-height:170px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.skill i{color:#d39d00;font-size:26px}
+.skill h4{margin:0;font-size:18px}
+.skill p{margin:0;color:#555}
+
+/* CV */
+.cv-grid{display:grid;grid-template-columns:1fr 2fr;gap:16px}
+@media (max-width:900px){.cv-grid{grid-template-columns:1fr}}
+.cv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.cv-card h4{margin:0 0 8px;color:#7a5a00}
+.cv-card ul{margin:0;padding-inline-start:18px}
+.cv-card .kvs{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cv-card .kvs li{background:#fffdee;border:1px solid var(--line);border-radius:12px;padding:12px}
+.cv-card .kvs .tag{font-weight:600;margin-inline-end:8px}
+.cv-card .kvs .meta{display:block;color:#555;margin-top:6px}
+/* Glow */
+.cv-card.y-glow{
+  background: linear-gradient(180deg,#ffffff,#fffdf1);
+  border-color:#fdf6df;
+  box-shadow:0 10px 28px rgba(176,139,0,.16),0 1px 0 rgba(255,247,203,.9) inset;
+}
+
+/* Footer */
+footer{background:#fff5bd;border-top:1px solid var(--line);text-align:center;padding:18px;color:#6a4b00;font-weight:800}
+footer .en{font-family:'Poppins',sans-serif;font-weight:600;color:#444}
+
+/* Language */
+.lang-ar [data-en], .lang-en [data-ar]{display:none}
+.lang-en{direction:ltr;font-family:'Poppins',sans-serif}
+.lang-en .section-head .title{border-inline-start:none;border-inline-end:6px solid var(--brand-2);padding-inline-start:0;padding-inline-end:10px}
+
+/* Lightbox */
+#overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
+#overlay.show{display:flex}
+#overlay .box{max-width:95vw;max-height:92vh}
+#overlay img,#overlay video{max-width:95vw;max-height:90vh;object-fit:contain;background:#000;border-radius:10px}
+#overlay .close{position:absolute;top:10px;inset-inline-end:14px;color:#fff;font-size:30px;cursor:pointer}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:200}
+.modal .panel{background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:20px;min-width:320px;max-width:90vw}
+.modal.show{display:flex}
+.input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+
+/* ===================== Responsive polish ===================== */
+@media (max-width:980px){
+  .hero-card{grid-template-columns:1fr}
+  .profile-chip{width:min(260px,75%)}
+}
+@media (max-width:680px){
+  .topbar .row{grid-template-columns:auto 1fr;gap:8px}
+  .brand{font-size:18px}
+  .lang-switch{flex-wrap:nowrap;overflow:hidden}
+  .lang-switch button,.login-btn,.nav-btn{padding:6px 10px;font-size:12px;border-radius:10px;white-space:nowrap}
+  .hero{padding:24px 0}
+  .hero-card{padding:16px}
+  section{padding:16px;margin:16px auto}
+  .lead{font-size:16px;line-height:1.8}
+}
+@media (max-width:520px){
+  .topbar .row{grid-template-columns:1fr;row-gap:8px}
+  .brand{justify-content:center}
+  .brand span{max-width:100%;white-space:normal;text-align:center}
+  .lang-switch{justify-content:center;flex-wrap:wrap}
+  #sectionsPanel{inset:0;top:auto;bottom:0;border-radius:16px 16px 0 0;min-width:auto;max-height:75vh;padding:12px;border:0;box-shadow:0 -8px 24px rgba(0,0,0,.14)}
+}
+section ul{padding-inline-start:1.2em}
+section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
+
+/* Motion prefs */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+
+<body class="lang-ar">
+
+<!-- ===================== Topbar ===================== -->
+<div class="topbar">
+  <div class="container row">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <span data-ar>المعلمة زينب صالح</span>
+      <span data-en>Teacher Zainab Salah</span>
+    </div>
+    <div class="menu" id="menu"></div>
+    <div class="lang-switch">
+      <button id="sectionsBtn" class="nav-btn" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-list"></i> <span data-ar>القائمة</span><span data-en>Sections</span></button>
+      <button class="secondary" id="to-ar" aria-label="Arabic">العربية</button>
+      <button id="to-en" aria-label="English">English</button>
+      <button id="loginBtn" class="login-btn" title="تسجيل الدخول" aria-label="Login"><i class="fa-solid fa-user"></i></button>
+      <button id="logoutBtn" class="login-btn" style="display:none" title="تسجيل الخروج" aria-label="Logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Sections Panel -->
+<div id="sectionsPanel"></div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-card">
+      <div class="hero-text">
+        <div class="badges">
+          <span class="badge"><i class="fa-solid fa-sun"></i><span data-ar>عام دراسي مُشرق</span><span data-en>Bright School Year</span></span>
+          <span class="badge"><i class="fa-solid fa-seedling"></i><span data-ar>تعلم نشِط</span><span data-en>Active Learning</span></span>
+        </div>
+        <h1 data-ar>المعلمة زينب صالح علي</h1>
+        <h1 data-en>Teacher Zainab Salah Ali</h1>
+        <h2 data-ar>معلمة – للمرحلة الإبتدائية والمتوسطة</h2>
+        <h2 data-en>Elementary & Middle School Teacher</h2>
+        <div class="cta">
+          <a class="btn" href="#gallery" data-ar><i class="fa-solid fa-image"></i> معرض الأعمال</a>
+          <a class="btn" href="#gallery" data-en><i class="fa-solid fa-image"></i> Photo Gallery</a>
+          <a class="btn secondary" href="#about" data-ar><i class="fa-solid fa-book-open"></i> نبذة</a>
+          <a class="btn secondary" href="#about" data-en><i class="fa-solid fa-book-open"></i> About</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="profile-chip" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== MAIN ===================== -->
+<main class="container">
+
+<section id="about">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-book-open"></i><span data-ar>نبذة تعريفية</span><span data-en>About</span></h3>
+  </div>
+  <p class="lead" data-ar>معلّمة اجتماعيات ودراسات إسلامية وفنية أركّز على بناء الهوية الوطنية والقيم، وتنمية التفكير الناقد والإبداعي عبر تعلّم تفاعلي متكامل يجمع بين المعرفة والمهارة والذائقة الجمالية. أُنَمّي الانضباط القيمي والوعي المجتمعي وتقدير الفنون والتراث، مستخدمةً استراتيجيات تعليمية حديثة ومشروعات أدائية أصيلة.</p>
+  <p class="lead" data-en>Interactive teacher across Social/Islamic/Art subjects with project-based, value-centric learning and authentic assessment.</p>
+</section>
+
+<section id="intro">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-paragraph"></i><span data-ar>المقدّمة</span><span data-en>Introduction</span></h3>
+  </div>
+  <p class="lead" data-ar>الحمد لله الذي علّم بالقلم… يقدّم هذا الملف توثيقًا منهجيًا لجهودي التعليمية خلال العام الدراسي، ويُبرز شواهد ممارساتي المهنية وأدلّتي الصفّية والمدرسية، وانعكاسات تطوّري المهني المستمر، بما يواكب مستهدفات رؤية المملكة 2030 في بناء مواطن/ـة واعٍ/ـية معتز/ـة بدينه/ـا ووطنه/ـا، متمكّن/ـة من مهارات العصر الحديث.</p>
+  <p class="lead" data-en>This portfolio documents my instructional practice, evidence, and continuous development aligned with Vision 2030.</p>
+</section>
+
+<section id="vision">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-eye"></i><span data-ar>الرؤية</span><span data-en>Vision</span></h3>
+  </div>
+  <p class="lead" data-ar>تعليم تفاعلي عميق يَمزج بين القيم الإسلامية والوعي المجتمعي والتعبير الفني في بيئة محفّزة مبتكرة، ينهض بالمتعلّمات والمتعلّمين معرفيًا وسلوكيًا ووجدانيًا، ويصنع جيلًا معتزًّا بهويته، مُبدعًا ومسؤولًا.</p>
+  <p class="lead" data-en>Deep, interactive learning blending values, civic awareness, and visual expression to foster creative, responsible learners.</p>
+</section>
+
+<section id="mission">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-bullseye"></i><span data-ar>الرسالة</span><span data-en>Mission</span></h3>
+  </div>
+  <p class="lead" data-ar>تعليم شامل ومتكامل يُعزّز الفهم العميق ويُنَمّي البحث والتحليل والتواصل البصري، ويُطلق طاقات الإبداع عبر ممارسات أصيلة وشراكات مجتمعية.</p>
+  <p class="lead" data-en>Provide inclusive, integrated teaching that builds research, analysis, and visual communication through authentic practice.</p>
+</section>
+
+<section id="values">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-gem"></i><span data-ar>القيم</span><span data-en>Values</span></h3>
+  </div>
+  <ul>
+    <li data-ar>الإخلاص والمسؤولية المهنية.</li><li data-en>Sincerity & Professional Responsibility</li>
+    <li data-ar>العدل واحترام الفروق الفردية وتنوّع الأساليب التعبيرية.</li><li data-en>Equity & Respect for Individual Differences</li>
+    <li data-ar>التعاون وروح الفريق داخل الصفّ ومع الأسرة والمجتمع.</li><li data-en>Collaboration with Family & Community</li>
+    <li data-ar>الانتماء والاعتزاز بالدين والوطن والتراث.</li><li data-en>Pride in Faith, Nation & Heritage</li>
+    <li data-ar>الإتقان والجودة والشفافية في التقويم.</li><li data-en>Mastery, Quality & Assessment Transparency</li>
+  </ul>
+</section>
+
+<section id="goals">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-flag-checkered"></i><span data-ar>أهداف التعليم العامة</span><span data-en>General Education Goals</span></h3>
+  </div>
+  <ul>
+    <li data-ar>تعزيز دور الأسرة شريكًا أصيلًا في بناء القيم والهوية.</li><li data-en>Strengthen the family’s role as a core partner.</li>
+    <li data-ar>بناء رحلة تعليمية متكاملة بين المعرفة والمهارة والفنون.</li><li data-en>Build an integrated journey across knowledge & arts.</li>
+    <li data-ar>تحسين تكافؤ الفرص بالتكييف والتمايز.</li><li data-en>Advance equity via differentiation.</li>
+    <li data-ar>رفع مخرجات القراءة والتحليل والتفكير الناقد.</li><li data-en>Boost outcomes in reading & critical thinking.</li>
+    <li data-ar>تحسين جودة المدرسة عبر مؤشرات أداء وخطط تحسين.</li><li data-en>Improve school quality with clear KPIs.</li>
+    <li data-ar>تعزيز القضايا المجتمعية والقيمية والجمالية ذات الأولوية.</li><li data-en>Elevate priority social & aesthetic themes.</li>
+    <li data-ar>مواءمة المخرجات مع سوق العمل بمهارات القرن 21.</li><li data-en>Align with 21st-century skills & market needs.</li>
+  </ul>
+
+  <div class="section-head" style="margin-top:22px">
+    <h3 class="title"><i class="fa-solid fa-landmark"></i><span data-ar>سياسة التعليم في المملكة</span><span data-en>Education Policy in Saudi Arabia</span></h3>
+  </div>
+  <p class="lead" data-ar>سياسة ترتكز إلى مبادئ الشريعة وترسيخ الهوية الوطنية ورفع جودة المخرجات وتوظيف التحوّل الرقمي وتنمية مهارات التفكير والإبداع والتعاون.</p>
+  <p class="lead" data-en>Policy emphasizes values, identity, quality, digital transition, and higher-order skills.</p>
+</section>
+
+<section id="ethics">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-scale-balanced"></i><span data-ar>ميثاق أخلاقيات المهنة</span><span data-en>Code of Professional Ethics</span></h3>
+  </div>
+
+  <div class="cv-card">
+    <h4 data-ar>المادة الأولى: تعريفات</h4><h4 data-en>Article 1: Definitions</h4>
+    <ul>
+      <li data-ar><b>أخلاقيات مهنة التعليم:</b> منظومة قيم تنظّم الممارسة وتكفل الحقوق.</li>
+      <li data-ar><b>المعلّمة:</b> قائدة تعلّم تبني المعارف والمهارات والقيم والذائقة.</li>
+      <li data-ar><b>الطالبة/الطالب:</b> شريك/ـة فاعل/ـة في تعلّمه/ـا ومسؤول/ـة عن نتائجه.</li>
+    </ul>
+  </div>
+
+  <div class="cv-card">
+    <h4 data-ar>المادة الثانية: الأهداف</h4><h4 data-en>Article 2: Objectives</h4>
+    <ul>
+      <li data-ar>تعزيز الانتماء للمهنة والسموّ بها سلوكًا وممارسة.</li>
+      <li data-ar>تمكين التطوّر المهني وفق معايير الجودة.</li>
+      <li data-ar>حفظ الحقوق وترسيخ الاحترام والمسؤولية.</li>
+      <li data-ar>إشاعة ثقافة النزاهة والعدالة والشفافية.</li>
+    </ul>
+  </div>
+
+  <div class="cv-card">
+    <h4 data-ar>المادة الثالثة: رسالة التعليم</h4><h4 data-en>Article 3: Mission of Education</h4>
+    <p data-ar>رسالة تستمد أصولها من الشريعة وتُعلي قيم الإخلاص والعدل وخدمة المجتمع والتعبير الفني الواعي.</p>
+  </div>
+
+  <div class="cv-card">
+    <h4 data-ar>المادة الرابعة: أدوار المعلّمة</h4><h4 data-en>Article 4: Teacher’s Roles</h4>
+    <ul>
+      <li data-ar>تطوير الأداء وتحديث الاستراتيجيات والتقويمات الأصيلة.</li>
+      <li data-ar>تهيئة بيئة آمنة داعمة للتعبير المسؤول والاختلاف البنّاء.</li>
+      <li data-ar>التعلّم بالمشروعات، العروض، المعارض الفنية، والرحلات.</li>
+      <li data-ar>التكامل بين الشرعي والاجتماعي والفني.</li>
+      <li data-ar>التعاون مع الأسرة والمجتمع والتحسين المستمر.</li>
+      <li data-ar>حماية الحقوق الفكرية والإبداعية.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="cv">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-id-card"></i><span data-ar>السيرة الذاتية (CV)</span><span data-en>Curriculum Vitae</span></h3>
+  </div>
+  <div class="cv-grid">
+    <!-- Personal Details -->
+    <div class="cv-card y-glow">
+      <h4 data-ar>البيانات الشخصية</h4><h4 data-en>Personal Details</h4>
+      <ul>
+        <li data-ar>الاسم: زينب صالح علي</li><li data-en>Name: Zainab Saleh Ali</li>
+        <li data-ar>الوظيفة: معلمة اجتماعيات/دراسات إسلامية/فنية</li><li data-en>Role: Social Studies / Islamic & Art Teacher</li>
+        <li data-ar>البريد: <b>Zsalh3418@gmail.com</b></li><li data-en>Email: <b>Zsalh3418@gmail.com</b></li>
+        <li data-ar>الهاتف: <b>0556559296</b></li><li data-en>Phone: <b>0556559296</b></li>
+      </ul>
+    </div>
+
+    <!-- Professional Summary -->
+    <div class="cv-card y-glow">
+      <h4 data-ar>الملخص المهني</h4><h4 data-en>Professional Summary</h4>
+      <p data-ar>تعليم تفاعلي يربط القيم والوعي المجتمعي بالتعبير الفني، مع تركيز على التعلم بالمشروعات، والتقويمات الأصيلة، وبناء مهارات التفكير الناقد والإبداع والتذوّق الجمالي.</p>
+      <p data-en>Interactive, values-centered teaching across Social/Islamic/Art with project-based learning and authentic assessment.</p>
+    </div>
+
+    <!-- Education -->
+    <div class="cv-card y-glow">
+      <h4 data-ar>التعليم والمؤهلات</h4><h4 data-en>Education</h4>
+      <ul>
+        <li data-ar>بكالوريوس كيمياء – علوم تربوية، جامعة نجران</li>
+        <li data-en>Bachelor’s in Chemistry (Educational Sciences) — Najran University</li>
+      </ul>
+    </div>
+
+    <!-- Experience -->
+    <div class="cv-card y-glow">
+      <h4 data-ar>الخبرات العملية</h4><h4 data-en>Experience</h4>
+      <ul>
+        <li data-ar>تخطيط وحدات تكاملية وربط المفاهيم الشرعية بالمواطنة والتعبير الفني.</li><li data-en>Integrated unit planning blending values, citizenship & arts.</li>
+        <li data-ar>تنفيذ مشروعات أدائية ومعارض فنية وشراكات مجتمعية.</li><li data-en>Authentic projects, art showcases & community links.</li>
+        <li data-ar>إدارة صفّية فاعلة وتقويمات مبنية على بيانات.</li><li data-en>Effective classroom management & data-driven assessment.</li>
+      </ul>
+    </div>
+
+    <!-- Skills -->
+    <div class="cv-card y-glow">
+      <h4 data-ar>المهارات</h4><h4 data-en>Skills</h4>
+      <ul>
+        <li data-ar>استخدام الحاسب الآلي</li><li data-en>Computer Use</li>
+        <li data-ar>العمل ضمن فريق</li><li data-en>Teamwork</li>
+        <li data-ar>العمل تحت الضغط</li><li data-en>Working Under Pressure</li>
+        <li data-ar>مهارات التواصل مع الآخرين</li><li data-en>Communication</li>
+        <li data-ar>شخصية قيادية</li><li data-en>Leadership</li>
+      </ul>
+    </div>
+
+    <!-- Courses & Certificates -->
+    <div class="cv-card y-glow">
+      <h4 data-ar>الدورات والشهادات</h4><h4 data-en>Courses & Certificates</h4>
+      <ul class="kvs" data-ar>
+        <li><span class="tag">أمن المعلومات (Cyber Security)</span></li>
+        <li><span class="tag">إدارة الذات</span></li>
+        <li><span class="tag">مهارات المحادثة الإنجليزية للمبتدئين</span></li>
+        <li><span class="tag">مهارات الاستماع/القراءة/الكتابة</span></li>
+        <li><span class="tag">قواعد اللغة الإنجليزية الأساسية</span></li>
+        <li><span class="tag">Microsoft PowerPoint</span></li>
+        <li><span class="tag">مهارات المقابلة الوظيفية</span></li>
+        <li><span class="tag">كتابة سيرة ذاتية ناجحة</span></li>
+        <li><span class="tag">اكتشاف الميول المهنية</span></li>
+        <li><span class="tag">ورشة: التصميم باستخدام Canva</span></li>
+      </ul>
+      <ul class="kvs" data-en>
+        <li><span class="tag">Cyber Security</span></li>
+        <li><span class="tag">Self-Management</span></li>
+        <li><span class="tag">Conversational English (Beginners)</span></li>
+        <li><span class="tag">Listening / Reading / Writing</span></li>
+        <li><span class="tag">Basic English Grammar</span></li>
+        <li><span class="tag">Microsoft PowerPoint</span></li>
+        <li><span class="tag">Job Interview Skills</span></li>
+        <li><span class="tag">Successful CV Writing</span></li>
+        <li><span class="tag">Discover Career Preferences</span></li>
+        <li><span class="tag">Workshop: Design with Canva</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="certificates">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-award"></i><span data-ar>الشهادات الرسمية</span><span data-en>Official Certificates</span></h3>
+  </div>
+  <div class="gallery">
+    <div class="item"><img loading="lazy" src="./pro_license.jpg" alt="الرخصة المهنية – معلم ممارس" onclick="openImage(this.src,this.alt)"></div>
+    <div class="item"><img loading="lazy" src="./foundation_1445.jpg" alt="الحقيبة التأسيسية 1445هـ – 20 ساعة" onclick="openImage(this.src,this.alt)"></div>
+    <div class="item"><img loading="lazy" src="./olympiad_ws.jpg" alt="ورشة أولمبياد اللغة الإنجليزية – 5 ساعات" onclick="openImage(this.src,this.alt)"></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-image"></i><span data-ar>  أوراق العمل للصف الخامس ابتدائي | الثاني متوسط</span><span data-en>Worksheets for Fifth Grade & Second Intermediate Grade</span></h3>
+    <div class="actions" data-guard>
+      <label for="imgInput" class="btn icon" title="رفع صور"><i class="fa-solid fa-image"></i><span class="sr-only">رفع صور</span></label>
+      <input id="imgInput" type="file" multiple accept="image/*" hidden>
+    </div>
+  </div>
+  <div class="gallery" id="galleryGrid"></div>
+</section>
+
+<section id="support-grade5">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-layer-group"></i><span data-ar>أنشطة الصف الخامس ابتدائي</span><span data-en>Grade 5 Activities</span></h3>
+    <div class="actions" data-guard>
+      <label for="sp5ImgInput" class="btn icon" title="صور الأنشطة"><i class="fa-solid fa-images"></i></label>
+      <input id="sp5ImgInput" type="file" multiple accept="image/*" hidden>
+      <label for="sp5VidInput" class="btn icon" title="فيديوهات الأنشطة"><i class="fa-solid fa-clapperboard"></i></label>
+      <input id="sp5VidInput" type="file" multiple accept="video/*" hidden>
+    </div>
+  </div>
+  <div class="gallery" id="supportGrid5"></div>
+</section>
+
+<section id="support-grade8">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-layer-group"></i><span data-ar>أنشطة الصف الثاني متوسط</span><span data-en>Grade 8 Activities</span></h3>
+    <div class="actions" data-guard>
+      <label for="sp8ImgInput" class="btn icon" title="صور الأنشطة"><i class="fa-solid fa-images"></i></label>
+      <input id="sp8ImgInput" type="file" multiple accept="image/*" hidden>
+      <label for="sp8VidInput" class="btn icon" title="فيديوهات الأنشطة"><i class="fa-solid fa-clapperboard"></i></label>
+      <input id="sp8VidInput" type="file" multiple accept="video/*" hidden>
+    </div>
+  </div>
+  <div class="gallery" id="supportGrid8"></div>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <h3 class="title"><i class="fa-solid fa-chalkboard-user"></i>
+      <span data-ar>مهارات التدريس</span>
+      <span data-en>Teaching Skills</span>
+    </h3>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill"><i class="fa-solid fa-star-and-crescent"></i><h4 data-ar>دمج القيم والهوية الوطنية</h4><h4 data-en>Values & National Identity Integration</h4><p data-ar>ربط الدروس بالقيم والهوية والوعي المجتمعي.</p><p data-en>Connect lessons to values, identity & civic awareness.</p></div>
+    <div class="skill"><i class="fa-solid fa-magnifying-glass"></i><h4 data-ar>التعلّم بالاستقصاء والتفكير الناقد</h4><h4 data-en>Inquiry & Critical Thinking</h4><p data-ar>تحليل مصادر وبناء استنتاجات مدعومة.</p><p data-en>Source analysis and justified conclusions.</p></div>
+    <div class="skill"><i class="fa-solid fa-diagram-project"></i><h4 data-ar>التعلّم القائم على المشروعات</h4><h4 data-en>Project-Based Learning</h4><p data-ar>مشروعات أصيلة تربط الاجتماعيات والدراسات الإسلامية والفنون.</p><p data-en>Authentic projects linking subjects.</p></div>
+    <div class="skill"><i class="fa-solid fa-clipboard-check"></i><h4 data-ar>التقويم البنائي وروبريكات</h4><h4 data-en>Formative Assessment & Rubrics</h4><p data-ar>قوائم رصد ومعايير أداء شفافة.</p><p data-en>Checklists & transparent rubrics.</p></div>
+    <div class="skill"><i class="fa-solid fa-palette"></i><h4 data-ar>التكامل الفني والتعبير البصري</h4><h4 data-en>Arts Integration & Visual Expression</h4><p data-ar>ملصقات وخرائط ذهنية تعزّز الفهم والذائقة.</p><p data-en>Visuals to deepen understanding & aesthetics.</p></div>
+    <div class="skill"><i class="fa-solid fa-flag"></i><h4 data-ar>المواطنة والوعي المجتمعي</h4><h4 data-en>Civic Engagement</h4><p data-ar>مبادرات صفّية تربط التعلم بالحياة.</p><p data-en>Service learning & real-life links.</p></div>
+    <div class="skill"><i class="fa-solid fa-shield-halved"></i><h4 data-ar>المواطنة الرقمية والسلامة</h4><h4 data-en>Digital Citizenship & Safety</h4><p data-ar>استخدام مسؤول والتحقق من المصادر.</p><p data-en>Responsible use & source verification.</p></div>
+    <div class="skill"><i class="fa-solid fa-chart-line"></i><h4 data-ar>تحليل البيانات وخطط علاجية</h4><h4 data-en>Data-Driven Remediation</h4><p data-ar>اختبارات قصيرة وخطط دعم دقيقة.</p><p data-en>Frequent checks & tailored support.</p></div>
+    <div class="skill"><i class="fa-solid fa-laptop-file"></i><h4 data-ar>الأدوات الرقمية والتواصل البصري</h4><h4 data-en>Digital Tools & Visual Communication</h4><p data-ar>عروض وملصقات وخرائط تفاعلية وتوثيق رقمي.</p><p data-en>Slides, posters, simple interactive maps.</p></div>
+    <div class="skill"><i class="fa-solid fa-universal-access"></i><h4 data-ar>الشمولية وتهيئة الدروس (UDL)</h4><h4 data-en>Inclusive Education & UDL</h4><p data-ar>تمثيلات متعددة ومسارات بديلة للجميع.</p><p data-en>Multiple representations & pathways.</p></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div data-ar>© جميع الحقوق محفوظة | المعلمة زينب صالح</div>
+    <div data-en class="en">© All rights reserved | Teacher Zainab Salah</div>
+  </div>
+</footer>
+
+<!-- Lightbox overlay -->
+<div id="overlay" onclick="if(event.target.id==='overlay'||event.target.classList.contains('close')){overlay.classList.remove('show');box.innerHTML='';}">
+  <div class="close" aria-label="إغلاق">×</div>
+  <div class="box"></div>
+</div>
+
+<!-- Auth Modal -->
+<div id="authModal" class="modal" aria-hidden="true">
+  <div class="panel">
+    <h3 style="margin-top:0;color:#7a5a00" data-ar>تسجيل الدخول</h3>
+    <h3 style="margin-top:0;color:#7a5a00" data-en>Sign in</h3>
+
+    <input id="emailInput" type="email" class="input" placeholder="email@example.com" style="margin-bottom:8px" autocomplete="username">
+    <input id="passwordInput" type="password" class="input" placeholder="password" style="margin-bottom:8px" autocomplete="current-password">
+
+    <div class="cta" style="margin-top:12px">
+      <button id="signInBtn" class="btn" data-ar>تسجيل الدخول</button>
+      <button id="signInBtn_en" class="btn" data-en>Sign in</button>
+      <button id="closeAuth" class="btn secondary" data-ar>إغلاق</button>
+      <button id="closeAuth_en" class="btn secondary" data-en>Close</button>
+    </div>
+
+    <p id="authMsg" class="note" style="margin-top:10px;color:#7a5a00;font-weight:700"></p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ===== Language Toggle ===== */
+  const root = document.body;
+  document.getElementById('to-ar').onclick = ()=>{ root.classList.add('lang-ar'); root.classList.remove('lang-en'); };
+  document.getElementById('to-en').onclick = ()=>{ root.classList.add('lang-en'); root.classList.remove('lang-ar'); };
+
+  /* ===== Sections dropdown ===== */
+  const sectionsPanel = document.getElementById('sectionsPanel');
+  const sectionsBtn = document.getElementById('sectionsBtn');
+  const SECTIONS = [
+    ['about','fa-book-open','نبذة','About'],
+    ['intro','fa-paragraph','المقدمة','Introduction'],
+    ['vision','fa-eye','الرؤية','Vision'],
+    ['mission','fa-bullseye','الرسالة','Mission'],
+    ['values','fa-gem','القيم','Values'],
+    ['goals','fa-flag-checkered','الأهداف','Goals'],
+    ['ethics','fa-scale-balanced','الميثاق','Ethics'],
+    ['cv','fa-id-card','السيرة','CV'],
+    ['certificates','fa-award','الشهادات','Certificates'],
+    ['gallery','fa-images','الصور','Photos'],
+    ['support-grade5','fa-layer-group','خامس ابتدائي','Grade 5'],
+    ['support-grade8','fa-layer-group','ثاني متوسط','Grade 8'],
+    ['skills','fa-chalkboard-user','مهارات','Skills']
+  ];
+  sectionsPanel.innerHTML = SECTIONS
+    .map(([id,icon,ar,en])=>`<a href="#${id}"><i class="fa-solid ${icon}"></i><span data-ar>${ar}</span><span data-en>${en}</span></a>`)
+    .join('');
+  sectionsPanel.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); sectionsPanel.style.display='none'; sectionsBtn.setAttribute('aria-expanded','false');
+    document.getElementById(a.getAttribute('href').slice(1)).scrollIntoView({behavior:'smooth'});
+  }));
+  sectionsBtn.onclick = ()=>{
+    const show = sectionsPanel.style.display!=='block';
+    sectionsPanel.style.display = show ? 'block' : 'none';
+    sectionsBtn.setAttribute('aria-expanded', show ? 'true' : 'false');
+  };
+
+  /* ===== Lightbox ===== */
+  const overlay = document.getElementById('overlay');
+  const box = overlay.querySelector('.box');
+  function openImage(src, alt=''){ box.innerHTML=''; const big = new Image(); big.loading='eager'; big.src=src; big.alt=alt; overlay.classList.add('show'); box.appendChild(big); }
+  function openVideo(src){ box.innerHTML=''; const vv=document.createElement('video'); vv.src=src; vv.controls=true; vv.autoplay=true; overlay.classList.add('show'); box.appendChild(vv); }
+  window.openImage = openImage; window.openVideo = openVideo;
+
+  /* ===== Supabase Setup ===== */
+  const SUPABASE_URL = 'https://rdvsnplflsnjsqsbianh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkdnNucGxmbHNuanNxc2JpYW5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3MTg0NzUsImV4cCI6MjA3NzI5NDQ3NX0.lk3o6TqLNXQiB6EGZmlYvnr_SF3lPkJUxxlF73FevAQ';
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const MEDIA_BUCKET = 'mida';
+  const BASE_PATH   = 'zainab';
+  const SUPPORT_5_IMG_PATH = 'zainab/support/grade5/images';
+  const SUPPORT_5_VID_PATH = 'zainab/support/grade5/videos';
+  const SUPPORT_8_IMG_PATH = 'zainab/support/grade8/images';
+  const SUPPORT_8_VID_PATH = 'zainab/support/grade8/videos';
+
+  const authModal = document.getElementById('authModal');
+  const emailInput = document.getElementById('emailInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const msg = document.getElementById('authMsg');
+
+  function showAuth(show){ authModal.classList.toggle('show', !!show); authModal.setAttribute('aria-hidden', show ? 'false' : 'true'); }
+  function setMsg(t){ msg.textContent = t || ''; }
+  function filePath(type, name){ return `${BASE_PATH}/${type}/${Date.now()}_${name}`; }
+  function publicUrl(path){ return supabaseClient.storage.from(MEDIA_BUCKET).getPublicUrl(path).data.publicUrl; }
+  function setGuardVisible(isAuthed){
+    document.querySelectorAll('[data-guard]').forEach(el=>{ el.style.display = isAuthed ? 'flex' : 'none'; });
+    document.getElementById('logoutBtn').style.display = isAuthed ? 'inline-block' : 'none';
+  }
+
+  document.getElementById('loginBtn').onclick = ()=> showAuth(true);
+  document.getElementById('closeAuth').onclick = document.getElementById('closeAuth_en').onclick = ()=> showAuth(false);
+
+  async function getUser(){ const { data } = await supabaseClient.auth.getUser(); return data?.user ?? null; }
+  function requireUser(user){ if(!user){ showAuth(true); return false; } return true; }
+
+  document.getElementById('signInBtn').onclick = document.getElementById('signInBtn_en').onclick = async ()=>{
+    const email=(emailInput.value||'').trim(); const password=(passwordInput.value||'').trim();
+    if(!email||!password){ setMsg('أدخلي الإيميل وكلمة المرور / Enter email & password'); return; }
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if(error){ setMsg('خطأ: ' + error.message); return; }
+    setMsg('تم تسجيل الدخول ✓'); showAuth(false);
+    const user = await getUser(); setGuardVisible(!!user);
+  };
+  document.getElementById('logoutBtn').onclick = async ()=>{
+    await supabaseClient.auth.signOut(); setMsg('تم تسجيل الخروج'); setGuardVisible(false);
+  };
+
+  /* ===== Storage helpers ===== */
+  async function listAt(path){
+    const { data } = await supabaseClient.storage.from(MEDIA_BUCKET)
+      .list(path, { limit:200, sortBy:{column:'created_at', order:'desc'} });
+    return (data||[]).map(it=>({ name: it.name, path: `${path}/${it.name}`, url: publicUrl(`${path}/${it.name}`) }));
+  }
+  async function listFiles(type){ return listAt(`${BASE_PATH}/${type}`); }
+
+  async function uploadMany(type, files){
+    const user = await getUser(); if(!requireUser(user)) return;
+    for(const f of files){
+      const safe = f.name.replace(/\s+/g,'_');
+      const to = filePath(type, safe);
+      await supabaseClient.storage.from(MEDIA_BUCKET).upload(to, f, { cacheControl:'3600', upsert:false });
+    }
+    loadMedia();
+  }
+  async function uploadManyAt(path, files){
+    const user = await getUser(); if(!requireUser(user)) return;
+    for(const f of files){
+      const safe = f.name.replace(/\s+/g,'_');
+      const to = `${path}/${Date.now()}_${safe}`;
+      await supabaseClient.storage.from(MEDIA_BUCKET).upload(to, f, { cacheControl:'3600', upsert:false });
+    }
+    loadMedia();
+  }
+  async function removeFile(path){
+    const user = await getUser(); if(!requireUser(user)) return;
+    await supabaseClient.storage.from(MEDIA_BUCKET).remove([path]);
+    loadMedia();
+  }
+
+  // Renderers
+  const gGrid = document.getElementById('galleryGrid');
+  const supportGrid5 = document.getElementById('supportGrid5');
+  const supportGrid8 = document.getElementById('supportGrid8');
+
+  function renderImages(list){
+    gGrid.innerHTML = list.length ? list.map(it=>`
+      <div class="item">
+        <img loading="lazy" src="${it.url}" alt="${it.name}">
+        <div class="card-actions">
+          <button class="icon-btn" data-del="${it.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
+          <a class="icon-btn" href="${it.url}" download title="تنزيل / Download"><i class="fa-solid fa-download"></i></a>
+        </div>
+      </div>`).join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد صور حتى الآن.</p>';
+    gGrid.querySelectorAll('img').forEach(img=>img.addEventListener('click',()=>openImage(img.src, img.alt)));
+    gGrid.querySelectorAll('[data-del]').forEach(btn=>btn.addEventListener('click',()=>removeFile(btn.dataset.del)));
+  }
+
+  function renderSupportGrid(container, imgs, vids){
+    const cards = [];
+    imgs.forEach(it=>cards.push(`<div class="item"><img loading="lazy" src="${it.url}" alt="${it.name}" onclick="openImage(this.src,this.alt)"></div>`));
+    vids.forEach(it=>cards.push(`<div class="video-card"><div class="video-wrap"><video src="${it.url}" controls></video></div>
+      <div class="card-actions" style="position:absolute;top:12px;inset-inline-end:12px">
+        <a class="icon-btn" href="${it.url}" download title="تنزيل"><i class="fa-solid fa-download"></i></a>
+      </div></div>`));
+    container.innerHTML = cards.length ? cards.join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد عناصر حتى الآن.</p>';
+  }
+
+  // Inputs (guarded)
+  document.getElementById('imgInput')?.addEventListener('change', (e)=>uploadMany('images', e.target.files));
+
+  document.getElementById('sp5ImgInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_5_IMG_PATH, e.target.files));
+  document.getElementById('sp5VidInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_5_VID_PATH, e.target.files));
+
+  document.getElementById('sp8ImgInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_8_IMG_PATH, e.target.files));
+  document.getElementById('sp8VidInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_8_VID_PATH, e.target.files));
+
+  // Init
+  async function loadMedia(){
+    const [imgs, s5Imgs, s5Vids, s8Imgs, s8Vids, user] = await Promise.all([
+      listFiles('images'),
+      listAt(SUPPORT_5_IMG_PATH), listAt(SUPPORT_5_VID_PATH),
+      listAt(SUPPORT_8_IMG_PATH), listAt(SUPPORT_8_VID_PATH),
+      getUser()
+    ]);
+    renderImages(imgs);
+    renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
+    renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
+    setGuardVisible(!!user);
+  }
+
+  supabaseClient.auth.onAuthStateChange(async ()=>{ showAuth(false); loadMedia(); });
+  loadMedia();
+});
+</script>
+</body>
+</html>
