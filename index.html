@@ -128,6 +128,7 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 .card-actions{position:absolute;top:8px;inset-inline-end:8px;display:flex;gap:6px}
 .icon-btn{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;padding:6px;cursor:pointer}
 
+/* Videos */
 .videos-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit, minmax(220px,1fr))}
 .video-card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 18px rgba(176,139,0,.07);padding:12px;position:relative}
 .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
@@ -157,6 +158,18 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
   box-shadow:0 10px 28px rgba(176,139,0,.16),0 1px 0 rgba(255,247,203,.9) inset;
 }
 
+/* ===== PDF (Certificates) ===== */
+.pdf-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.pdf-card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 18px rgba(176,139,0,.07);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.pdf-wrap{position:relative;width:100%;aspect-ratio:3/4;background:#fff8cf;border-bottom:1px solid var(--line);display:grid;place-items:center}
+.pdf-wrap iframe,.pdf-wrap embed{width:100%;height:100%;border:0}
+.pdf-icon{font-size:42px;color:#d39d00}
+.pdf-body{padding:12px 12px 14px}
+.pdf-name{font-weight:800;color:#6a4b00;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdf-actions{position:absolute;top:10px;inset-inline-end:10px;display:flex;gap:6px}
+.pdf-actions .icon-btn{background:rgba(255,255,255,.98)}
+.pdf-open{position:absolute;inset:0;border:0;background:transparent;cursor:zoom-in}
+
 /* Footer */
 footer{background:#fff5bd;border-top:1px solid var(--line);text-align:center;padding:18px;color:#6a4b00;font-weight:800}
 footer .en{font-family:'Poppins',sans-serif;font-weight:600;color:#444}
@@ -170,7 +183,7 @@ footer .en{font-family:'Poppins',sans-serif;font-weight:600;color:#444}
 #overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
 #overlay.show{display:flex}
 #overlay .box{max-width:95vw;max-height:92vh}
-#overlay img,#overlay video{max-width:95vw;max-height:90vh;object-fit:contain;background:#000;border-radius:10px}
+#overlay img,#overlay video,#overlay iframe{max-width:95vw;max-height:90vh;object-fit:contain;background:#000;border-radius:10px}
 #overlay .close{position:absolute;top:10px;inset-inline-end:14px;color:#fff;font-size:30px;cursor:pointer}
 
 /* Modal */
@@ -373,100 +386,16 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   </div>
 </section>
 
-<section id="cv">
-  <div class="section-head">
-    <h3 class="title"><i class="fa-solid fa-id-card"></i><span data-ar>السيرة الذاتية (CV)</span><span data-en>Curriculum Vitae</span></h3>
-  </div>
-  <div class="cv-grid">
-    <!-- Personal Details -->
-    <div class="cv-card y-glow">
-      <h4 data-ar>البيانات الشخصية</h4><h4 data-en>Personal Details</h4>
-      <ul>
-        <li data-ar>الاسم: زينب صالح علي</li><li data-en>Name: Zainab Saleh Ali</li>
-        <li data-ar>الوظيفة: معلمة اجتماعيات/دراسات إسلامية/فنية</li><li data-en>Role: Social Studies / Islamic & Art Teacher</li>
-        <li data-ar>البريد: <b>Zsalh3418@gmail.com</b></li><li data-en>Email: <b>Zsalh3418@gmail.com</b></li>
-        <li data-ar>الهاتف: <b>0556559296</b></li><li data-en>Phone: <b>0556559296</b></li>
-      </ul>
-    </div>
-
-    <!-- Professional Summary -->
-    <div class="cv-card y-glow">
-      <h4 data-ar>الملخص المهني</h4><h4 data-en>Professional Summary</h4>
-      <p data-ar>تعليم تفاعلي يربط القيم والوعي المجتمعي بالتعبير الفني، مع تركيز على التعلم بالمشروعات، والتقويمات الأصيلة، وبناء مهارات التفكير الناقد والإبداع والتذوّق الجمالي.</p>
-      <p data-en>Interactive, values-centered teaching across Social/Islamic/Art with project-based learning and authentic assessment.</p>
-    </div>
-
-    <!-- Education -->
-    <div class="cv-card y-glow">
-      <h4 data-ar>التعليم والمؤهلات</h4><h4 data-en>Education</h4>
-      <ul>
-        <li data-ar>بكالوريوس كيمياء – علوم تربوية، جامعة نجران</li>
-        <li data-en>Bachelor’s in Chemistry (Educational Sciences) — Najran University</li>
-      </ul>
-    </div>
-
-    <!-- Experience -->
-    <div class="cv-card y-glow">
-      <h4 data-ar>الخبرات العملية</h4><h4 data-en>Experience</h4>
-      <ul>
-        <li data-ar>تخطيط وحدات تكاملية وربط المفاهيم الشرعية بالمواطنة والتعبير الفني.</li><li data-en>Integrated unit planning blending values, citizenship & arts.</li>
-        <li data-ar>تنفيذ مشروعات أدائية ومعارض فنية وشراكات مجتمعية.</li><li data-en>Authentic projects, art showcases & community links.</li>
-        <li data-ar>إدارة صفّية فاعلة وتقويمات مبنية على بيانات.</li><li data-en>Effective classroom management & data-driven assessment.</li>
-      </ul>
-    </div>
-
-    <!-- Skills -->
-    <div class="cv-card y-glow">
-      <h4 data-ar>المهارات</h4><h4 data-en>Skills</h4>
-      <ul>
-        <li data-ar>استخدام الحاسب الآلي</li><li data-en>Computer Use</li>
-        <li data-ar>العمل ضمن فريق</li><li data-en>Teamwork</li>
-        <li data-ar>العمل تحت الضغط</li><li data-en>Working Under Pressure</li>
-        <li data-ar>مهارات التواصل مع الآخرين</li><li data-en>Communication</li>
-        <li data-ar>شخصية قيادية</li><li data-en>Leadership</li>
-      </ul>
-    </div>
-
-    <!-- Courses & Certificates -->
-    <div class="cv-card y-glow">
-      <h4 data-ar>الدورات والشهادات</h4><h4 data-en>Courses & Certificates</h4>
-      <ul class="kvs" data-ar>
-        <li><span class="tag">أمن المعلومات (Cyber Security)</span></li>
-        <li><span class="tag">إدارة الذات</span></li>
-        <li><span class="tag">مهارات المحادثة الإنجليزية للمبتدئين</span></li>
-        <li><span class="tag">مهارات الاستماع/القراءة/الكتابة</span></li>
-        <li><span class="tag">قواعد اللغة الإنجليزية الأساسية</span></li>
-        <li><span class="tag">Microsoft PowerPoint</span></li>
-        <li><span class="tag">مهارات المقابلة الوظيفية</span></li>
-        <li><span class="tag">كتابة سيرة ذاتية ناجحة</span></li>
-        <li><span class="tag">اكتشاف الميول المهنية</span></li>
-        <li><span class="tag">ورشة: التصميم باستخدام Canva</span></li>
-      </ul>
-      <ul class="kvs" data-en>
-        <li><span class="tag">Cyber Security</span></li>
-        <li><span class="tag">Self-Management</span></li>
-        <li><span class="tag">Conversational English (Beginners)</span></li>
-        <li><span class="tag">Listening / Reading / Writing</span></li>
-        <li><span class="tag">Basic English Grammar</span></li>
-        <li><span class="tag">Microsoft PowerPoint</span></li>
-        <li><span class="tag">Job Interview Skills</span></li>
-        <li><span class="tag">Successful CV Writing</span></li>
-        <li><span class="tag">Discover Career Preferences</span></li>
-        <li><span class="tag">Workshop: Design with Canva</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
+<!-- ===================== CERTIFICATES (PDF) ===================== -->
 <section id="certificates">
   <div class="section-head">
-    <h3 class="title"><i class="fa-solid fa-award"></i><span data-ar>الشهادات الرسمية</span><span data-en>Official Certificates</span></h3>
+    <h3 class="title"><i class="fa-solid fa-award"></i><span data-ar>الشهادات الرسمية (PDF)</span><span data-en>Official Certificates (PDF)</span></h3>
+    <div class="actions" data-guard>
+      <label for="pdfInput" class="btn icon" title="رفع ملفات PDF"><i class="fa-solid fa-file-pdf"></i></label>
+      <input id="pdfInput" type="file" multiple accept="application/pdf" hidden>
+    </div>
   </div>
-  <div class="gallery">
-    <div class="item"><img loading="lazy" src="./pro_license.jpg" alt="الرخصة المهنية – معلم ممارس" onclick="openImage(this.src,this.alt)"></div>
-    <div class="item"><img loading="lazy" src="./foundation_1445.jpg" alt="الحقيبة التأسيسية 1445هـ – 20 ساعة" onclick="openImage(this.src,this.alt)"></div>
-    <div class="item"><img loading="lazy" src="./olympiad_ws.jpg" alt="ورشة أولمبياد اللغة الإنجليزية – 5 ساعات" onclick="openImage(this.src,this.alt)"></div>
-  </div>
+  <div class="pdf-grid" id="certsGrid"></div>
 </section>
 
 <section id="gallery">
@@ -606,7 +535,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const box = overlay.querySelector('.box');
   function openImage(src, alt=''){ box.innerHTML=''; const big = new Image(); big.loading='eager'; big.src=src; big.alt=alt; overlay.classList.add('show'); box.appendChild(big); }
   function openVideo(src){ box.innerHTML=''; const vv=document.createElement('video'); vv.src=src; vv.controls=true; vv.autoplay=true; overlay.classList.add('show'); box.appendChild(vv); }
-  window.openImage = openImage; window.openVideo = openVideo;
+  function openPdf(src){
+    box.innerHTML='';
+    const iframe=document.createElement('iframe');
+    // Hide default toolbar for a cleaner look where supported
+    iframe.src = src + '#toolbar=0&navpanes=0&scrollbar=0';
+    iframe.style.width='95vw'; iframe.style.height='90vh';
+    overlay.classList.add('show');
+    box.appendChild(iframe);
+  }
+  window.openImage = openImage; window.openVideo = openVideo; window.openPdf = openPdf;
 
   /* ===== Supabase Setup ===== */
   const SUPABASE_URL = 'https://rdvsnplflsnjsqsbianh.supabase.co';
@@ -615,6 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const MEDIA_BUCKET = 'mida';
   const BASE_PATH   = 'zainab';
+  const CERTS_PATH  = 'zainab/certificates';              // <— PDFs live here
   const SUPPORT_5_IMG_PATH = 'zainab/support/grade5/images';
   const SUPPORT_5_VID_PATH = 'zainab/support/grade5/videos';
   const SUPPORT_8_IMG_PATH = 'zainab/support/grade8/images';
@@ -688,12 +627,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const gGrid = document.getElementById('galleryGrid');
   const supportGrid5 = document.getElementById('supportGrid5');
   const supportGrid8 = document.getElementById('supportGrid8');
+  const certsGrid   = document.getElementById('certsGrid');
 
   function renderImages(list){
     gGrid.innerHTML = list.length ? list.map(it=>`
       <div class="item">
         <img loading="lazy" src="${it.url}" alt="${it.name}">
-        <div class="card-actions">
+        <div class="card-actions" data-guard>
           <button class="icon-btn" data-del="${it.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
           <a class="icon-btn" href="${it.url}" download title="تنزيل / Download"><i class="fa-solid fa-download"></i></a>
         </div>
@@ -706,17 +646,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = [];
     imgs.forEach(it=>cards.push(`<div class="item"><img loading="lazy" src="${it.url}" alt="${it.name}" onclick="openImage(this.src,this.alt)"></div>`));
     vids.forEach(it=>cards.push(`<div class="video-card"><div class="video-wrap"><video src="${it.url}" controls></video></div>
-      <div class="card-actions" style="position:absolute;top:12px;inset-inline-end:12px">
+      <div class="card-actions" style="position:absolute;top:12px;inset-inline-end:12px" data-guard>
         <a class="icon-btn" href="${it.url}" download title="تنزيل"><i class="fa-solid fa-download"></i></a>
       </div></div>`));
     container.innerHTML = cards.length ? cards.join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد عناصر حتى الآن.</p>';
   }
 
-  // ---------- ADD: helpers to decorate support grids with Delete ----------
+  // Add Delete bar to support grids
   function addActionBar(parent, path, url, anchored=false){
     const bar = document.createElement('div');
     bar.className = 'card-actions';
-    bar.setAttribute('data-guard',''); // hidden when logged out
+    bar.setAttribute('data-guard','');
     if (anchored) {
       bar.style.position = 'absolute';
       bar.style.top = '12px';
@@ -732,26 +672,18 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     parent.appendChild(bar);
   }
-
   function decorateSupportGrid(container, imgs, vids){
-    // remove any previous image action bars to avoid duplicates
     container.querySelectorAll('.item .card-actions').forEach(el => el.remove());
 
-    // Images: create Delete + Download
     const imgCards = Array.from(container.querySelectorAll('.item'));
-    imgCards.forEach((wrap, i)=>{
-      const meta = imgs[i]; if (!meta) return;
-      addActionBar(wrap, meta.path, meta.url);
-    });
+    imgCards.forEach((wrap, i)=>{ const meta = imgs[i]; if (!meta) return; addActionBar(wrap, meta.path, meta.url); });
 
-    // Videos: ensure a Delete button exists (download is already rendered)
     const vidCards = Array.from(container.querySelectorAll('.video-card'));
     vidCards.forEach((wrap, i)=>{
       const meta = vids[i]; if (!meta) return;
       let bar = wrap.querySelector('.card-actions');
       if (!bar) {
         addActionBar(wrap, meta.path, meta.url, true);
-        bar = wrap.querySelector('.card-actions');
       } else if (!bar.querySelector('[data-del]')) {
         const btn = document.createElement('button');
         btn.className = 'icon-btn';
@@ -763,7 +695,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Wire delete clicks
     container.querySelectorAll('[data-del]').forEach(btn=>{
       btn.addEventListener('click', (e)=>{
         e.stopPropagation();
@@ -773,8 +704,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ===== Certificates (PDF) =====
+  function renderCertificates(list){
+    // only PDFs
+    const pdfs = list.filter(it => /\.pdf$/i.test(it.name));
+    certsGrid.innerHTML = pdfs.length ? pdfs.map(it=>`
+      <div class="pdf-card">
+        <div class="pdf-wrap">
+          <!-- Lightweight inline preview; clicks open a big overlay -->
+          <embed src="${it.url}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" />
+          <button class="pdf-open" data-open="${it.url}" aria-label="Open PDF"></button>
+          <div class="pdf-actions" data-guard>
+            <button class="icon-btn" data-del="${it.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
+            <a class="icon-btn" href="${it.url}" download title="تنزيل / Download"><i class="fa-solid fa-download"></i></a>
+          </div>
+        </div>
+        <div class="pdf-body">
+          <div class="pdf-name" title="${it.name}"><i class="fa-solid fa-file-pdf" style="margin-inline-start:4px;color:#d39d00"></i> ${it.name}</div>
+        </div>
+      </div>
+    `).join('') : '<p style="grid-column:1/-1;color:#64748b">لا توجد شهادات PDF حتى الآن.</p>';
+
+    // open overlay
+    certsGrid.querySelectorAll('[data-open]').forEach(btn=>{
+      btn.addEventListener('click', ()=> openPdf(btn.dataset.open));
+    });
+    // delete
+    certsGrid.querySelectorAll('[data-del]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const path = btn.dataset.del;
+        if (confirm('هل تريدين حذف هذه الشهادة؟')) removeFile(path);
+      });
+    });
+  }
+
   // Inputs (guarded)
   document.getElementById('imgInput')?.addEventListener('change', (e)=>uploadMany('images', e.target.files));
+  document.getElementById('pdfInput')?.addEventListener('change', (e)=>uploadManyAt(CERTS_PATH, e.target.files));
   document.getElementById('sp5ImgInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_5_IMG_PATH, e.target.files));
   document.getElementById('sp5VidInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_5_VID_PATH, e.target.files));
   document.getElementById('sp8ImgInput')?.addEventListener('change', (e)=>uploadManyAt(SUPPORT_8_IMG_PATH, e.target.files));
@@ -782,20 +749,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init
   async function loadMedia(){
-    const [imgs, s5Imgs, s5Vids, s8Imgs, s8Vids, user] = await Promise.all([
+    const [imgs, s5Imgs, s5Vids, s8Imgs, s8Vids, certs, user] = await Promise.all([
       listFiles('images'),
       listAt(SUPPORT_5_IMG_PATH), listAt(SUPPORT_5_VID_PATH),
       listAt(SUPPORT_8_IMG_PATH), listAt(SUPPORT_8_VID_PATH),
+      listAt(CERTS_PATH),
       getUser()
     ]);
 
     renderImages(imgs);
 
     renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
-    decorateSupportGrid(supportGrid5, s5Imgs, s5Vids);   // ✅ add delete buttons
+    decorateSupportGrid(supportGrid5, s5Imgs, s5Vids);
 
     renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
-    decorateSupportGrid(supportGrid8, s8Imgs, s8Vids);   // ✅ add delete buttons
+    decorateSupportGrid(supportGrid8, s8Imgs, s8Vids);
+
+    renderCertificates(certs);
 
     setGuardVisible(!!user);
   }
