@@ -730,9 +730,16 @@ document.addEventListener('DOMContentLoaded', () => {
       getUser()
     ]);
     renderImages(imgs);
+   // renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
+    //renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
     renderSupportGrid(supportGrid5, s5Imgs, s5Vids);
-    renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
+  decorateSupportGrid(supportGrid5, s5Imgs, s5Vids);   // ✅ add this
+
+  renderSupportGrid(supportGrid8, s8Imgs, s8Vids);
+  decorateSupportGrid(supportGrid8, s8Imgs, s8Vids);   // ✅ add this
     setGuardVisible(!!user);
+
+    
   }
 
   supabaseClient.auth.onAuthStateChange(async ()=>{ showAuth(false); loadMedia(); });
